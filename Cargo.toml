@@ -1,0 +1,27 @@
+[package]
+name = "keyberon_failed_configure"
+version = "0.1.0"
+edition = "2018"
+publish = false
+
+[dependencies]
+panic-probe = { version = "*", features = ["print-defmt"] }
+defmt = "*"
+defmt-rtt = "*"
+keyberon= "*"
+
+cortex-m = {version="0.7.2", features = ["critical-section-single-core"]}
+cortex-m-rt = "*"
+
+nrf-usbd = "*"
+usb-device = "0.2.7"
+usbd-serial = "0.1.0"
+nrf52840-pac = "0.9.0"
+
+[[bin]]
+name = "keyberon"
+path = "src/main.rs"
+
+[[bin]]
+name = "serial"
+path = "src/serial.rs"
