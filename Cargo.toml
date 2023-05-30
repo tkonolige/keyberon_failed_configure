@@ -15,7 +15,6 @@ cortex-m-rt = "*"
 
 nrf-usbd = "*"
 usb-device = "0.2.7"
-usbd-serial = "0.1.0"
 nrf52840-pac = "0.9.0"
 
 [[bin]]
@@ -25,3 +24,6 @@ path = "src/main.rs"
 [[bin]]
 name = "serial"
 path = "src/serial.rs"
+
+[profile.release]
+debug = true

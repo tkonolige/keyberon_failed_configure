@@ -14,7 +14,6 @@ use defmt::*;
 use nrf52840_pac as pac;
 use usb_device::device::{UsbDeviceBuilder, UsbVidPid};
 use usb_device::class::UsbClass;
-use usbd_serial::{SerialPort, USB_CLASS_CDC};
 
 #[entry]
 fn main() -> ! {
@@ -35,7 +34,11 @@ fn main() -> ! {
 
     let usb_bus = UsbBusAllocator::new(Usbd::new(Peripheral));
     let mut usb_class = keyberon::new_class(&usb_bus, ());
-    let mut usb_dev = keyberon::new_device(&usb_bus);
+    let mut usb_dev = UsbDeviceBuilder::new(&usb_bus, UsbVidPid(0x16c0, 0x27dd))
+        .product("example")
+        .manufacturer("test")
+        .max_packet_size_0(64) // comment out this line to cause configuration failure
+        .build();
 
     info!("started!");
 
